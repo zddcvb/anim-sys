@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yanxi.anim.sys.mapper.AnimResMapper" >
+  <resultMap id="BaseResultMap" type="com.yanxi.anim.sys.pojo.AnimRes" >
+    <id column="res_id" property="resId" jdbcType="VARCHAR" />
+    <result column="res_name" property="resName" jdbcType="VARCHAR" />
+    <result column="res_url" property="resUrl" jdbcType="VARCHAR" />
+    <result column="res_size" property="resSize" jdbcType="VARCHAR" />
+    <result column="res_createTime" property="resCreatetime" jdbcType="VARCHAR" />
+    <result column="res_updateTime" property="resUpdatetime" jdbcType="VARCHAR" />
+    <result column="isDeleted" property="isdeleted" jdbcType="BIT" />
+    <result column="res_catagorty_id" property="resCatagortyId" jdbcType="VARCHAR" />
+    <result column="res_review_url" property="resReviewUrl" jdbcType="VARCHAR" />
+    <result column="res_view_url" property="resViewUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    res_id, res_name, res_url, res_size, res_createTime, res_updateTime, isDeleted, res_catagorty_id, 
+    res_review_url, res_view_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yanxi.anim.sys.pojo.AnimResExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from anim_res
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from anim_res
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from anim_res
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yanxi.anim.sys.pojo.AnimResExample" >
+    delete from anim_res
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yanxi.anim.sys.pojo.AnimRes" >
+    insert into anim_res (res_id, res_name, res_url, 
+      res_size, res_createTime, res_updateTime, 
+      isDeleted, res_catagorty_id, res_review_url, 
+      res_view_url)
+    values (#{resId,jdbcType=VARCHAR}, #{resName,jdbcType=VARCHAR}, #{resUrl,jdbcType=VARCHAR}, 
+      #{resSize,jdbcType=VARCHAR}, #{resCreatetime,jdbcType=VARCHAR}, #{resUpdatetime,jdbcType=VARCHAR}, 
+      #{isdeleted,jdbcType=BIT}, #{resCatagortyId,jdbcType=VARCHAR}, #{resReviewUrl,jdbcType=VARCHAR}, 
+      #{resViewUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yanxi.anim.sys.pojo.AnimRes" >
+    insert into anim_res
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resId != null" >
+        res_id,
+      </if>
+      <if test="resName != null" >
+        res_name,
+      </if>
+      <if test="resUrl != null" >
+        res_url,
+      </if>
+      <if test="resSize != null" >
+        res_size,
+      </if>
+      <if test="resCreatetime != null" >
+        res_createTime,
+      </if>
+      <if test="resUpdatetime != null" >
+        res_updateTime,
+      </if>
+      <if test="isdeleted != null" >
+        isDeleted,
+      </if>
+      <if test="resCatagortyId != null" >
+        res_catagorty_id,
+      </if>
+      <if test="resReviewUrl != null" >
+        res_review_url,
+      </if>
+      <if test="resViewUrl != null" >
+        res_view_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resId != null" >
+        #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="resName != null" >
+        #{resName,jdbcType=VARCHAR},
+      </if>
+      <if test="resUrl != null" >
+        #{resUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resSize != null" >
+        #{resSize,jdbcType=VARCHAR},
+      </if>
+      <if test="resCreatetime != null" >
+        #{resCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="resUpdatetime != null" >
+        #{resUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="resCatagortyId != null" >
+        #{resCatagortyId,jdbcType=VARCHAR},
+      </if>
+      <if test="resReviewUrl != null" >
+        #{resReviewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resViewUrl != null" >
+        #{resViewUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yanxi.anim.sys.pojo.AnimResExample" resultType="java.lang.Integer" >
+    select count(*) from anim_res
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update anim_res
+    <set >
+      <if test="record.resId != null" >
+        res_id = #{record.resId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resName != null" >
+        res_name = #{record.resName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resUrl != null" >
+        res_url = #{record.resUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resSize != null" >
+        res_size = #{record.resSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resCreatetime != null" >
+        res_createTime = #{record.resCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resUpdatetime != null" >
+        res_updateTime = #{record.resUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdeleted != null" >
+        isDeleted = #{record.isdeleted,jdbcType=BIT},
+      </if>
+      <if test="record.resCatagortyId != null" >
+        res_catagorty_id = #{record.resCatagortyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resReviewUrl != null" >
+        res_review_url = #{record.resReviewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resViewUrl != null" >
+        res_view_url = #{record.resViewUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update anim_res
+    set res_id = #{record.resId,jdbcType=VARCHAR},
+      res_name = #{record.resName,jdbcType=VARCHAR},
+      res_url = #{record.resUrl,jdbcType=VARCHAR},
+      res_size = #{record.resSize,jdbcType=VARCHAR},
+      res_createTime = #{record.resCreatetime,jdbcType=VARCHAR},
+      res_updateTime = #{record.resUpdatetime,jdbcType=VARCHAR},
+      isDeleted = #{record.isdeleted,jdbcType=BIT},
+      res_catagorty_id = #{record.resCatagortyId,jdbcType=VARCHAR},
+      res_review_url = #{record.resReviewUrl,jdbcType=VARCHAR},
+      res_view_url = #{record.resViewUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanxi.anim.sys.pojo.AnimRes" >
+    update anim_res
+    <set >
+      <if test="resName != null" >
+        res_name = #{resName,jdbcType=VARCHAR},
+      </if>
+      <if test="resUrl != null" >
+        res_url = #{resUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resSize != null" >
+        res_size = #{resSize,jdbcType=VARCHAR},
+      </if>
+      <if test="resCreatetime != null" >
+        res_createTime = #{resCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="resUpdatetime != null" >
+        res_updateTime = #{resUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeleted != null" >
+        isDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="resCatagortyId != null" >
+        res_catagorty_id = #{resCatagortyId,jdbcType=VARCHAR},
+      </if>
+      <if test="resReviewUrl != null" >
+        res_review_url = #{resReviewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resViewUrl != null" >
+        res_view_url = #{resViewUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yanxi.anim.sys.pojo.AnimRes" >
+    update anim_res
+    set res_name = #{resName,jdbcType=VARCHAR},
+      res_url = #{resUrl,jdbcType=VARCHAR},
+      res_size = #{resSize,jdbcType=VARCHAR},
+      res_createTime = #{resCreatetime,jdbcType=VARCHAR},
+      res_updateTime = #{resUpdatetime,jdbcType=VARCHAR},
+      isDeleted = #{isdeleted,jdbcType=BIT},
+      res_catagorty_id = #{resCatagortyId,jdbcType=VARCHAR},
+      res_review_url = #{resReviewUrl,jdbcType=VARCHAR},
+      res_view_url = #{resViewUrl,jdbcType=VARCHAR}
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </update>
+</mapper>

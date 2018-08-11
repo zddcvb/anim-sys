@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.3.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
+http://www.springframework.org/schema/jee
+http://www.springframework.org/schema/jee/spring-jee-4.3.xsd">
+
+	<!-- 根据基础包名，自动装配bean -->
+	<context:component-scan base-package="
+	com.yanxi.anim.sys.service ">
+	</context:component-scan>
+	<context:annotation-config></context:annotation-config>
+	<context:property-placeholder location="classpath:url.properties" />
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"></bean>
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
+		<constructor-arg name="host" value="${REDIS_URL}"></constructor-arg>
+		<constructor-arg name="port" value="${REDIS_PORT}"></constructor-arg>
+	</bean>
+
+</beans>

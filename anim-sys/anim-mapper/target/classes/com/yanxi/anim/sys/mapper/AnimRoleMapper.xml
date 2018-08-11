@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yanxi.anim.sys.mapper.AnimRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.yanxi.anim.sys.pojo.AnimRole" >
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="role_createTime" property="roleCreatetime" jdbcType="VARCHAR" />
+    <result column="role_updateTime" property="roleUpdatetime" jdbcType="VARCHAR" />
+    <result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="role_duty" property="roleDuty" jdbcType="VARCHAR" />
+    <result column="isDeleted" property="isdeleted" jdbcType="BIT" />
+    <result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    role_id, role_name, role_createTime, role_updateTime, role_desc, role_duty, isDeleted, 
+    dept_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yanxi.anim.sys.pojo.AnimRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from anim_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from anim_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from anim_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yanxi.anim.sys.pojo.AnimRoleExample" >
+    delete from anim_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yanxi.anim.sys.pojo.AnimRole" >
+    insert into anim_role (role_id, role_name, role_createTime, 
+      role_updateTime, role_desc, role_duty, 
+      isDeleted, dept_id)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleCreatetime,jdbcType=VARCHAR}, 
+      #{roleUpdatetime,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, #{roleDuty,jdbcType=VARCHAR}, 
+      #{isdeleted,jdbcType=BIT}, #{deptId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yanxi.anim.sys.pojo.AnimRole" >
+    insert into anim_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="roleCreatetime != null" >
+        role_createTime,
+      </if>
+      <if test="roleUpdatetime != null" >
+        role_updateTime,
+      </if>
+      <if test="roleDesc != null" >
+        role_desc,
+      </if>
+      <if test="roleDuty != null" >
+        role_duty,
+      </if>
+      <if test="isdeleted != null" >
+        isDeleted,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreatetime != null" >
+        #{roleCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleUpdatetime != null" >
+        #{roleUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDuty != null" >
+        #{roleDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yanxi.anim.sys.pojo.AnimRoleExample" resultType="java.lang.Integer" >
+    select count(*) from anim_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update anim_role
+    <set >
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleName != null" >
+        role_name = #{record.roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleCreatetime != null" >
+        role_createTime = #{record.roleCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleUpdatetime != null" >
+        role_updateTime = #{record.roleUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleDesc != null" >
+        role_desc = #{record.roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleDuty != null" >
+        role_duty = #{record.roleDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdeleted != null" >
+        isDeleted = #{record.isdeleted,jdbcType=BIT},
+      </if>
+      <if test="record.deptId != null" >
+        dept_id = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update anim_role
+    set role_id = #{record.roleId,jdbcType=VARCHAR},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
+      role_createTime = #{record.roleCreatetime,jdbcType=VARCHAR},
+      role_updateTime = #{record.roleUpdatetime,jdbcType=VARCHAR},
+      role_desc = #{record.roleDesc,jdbcType=VARCHAR},
+      role_duty = #{record.roleDuty,jdbcType=VARCHAR},
+      isDeleted = #{record.isdeleted,jdbcType=BIT},
+      dept_id = #{record.deptId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanxi.anim.sys.pojo.AnimRole" >
+    update anim_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreatetime != null" >
+        role_createTime = #{roleCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleUpdatetime != null" >
+        role_updateTime = #{roleUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null" >
+        role_desc = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDuty != null" >
+        role_duty = #{roleDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeleted != null" >
+        isDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yanxi.anim.sys.pojo.AnimRole" >
+    update anim_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      role_createTime = #{roleCreatetime,jdbcType=VARCHAR},
+      role_updateTime = #{roleUpdatetime,jdbcType=VARCHAR},
+      role_desc = #{roleDesc,jdbcType=VARCHAR},
+      role_duty = #{roleDuty,jdbcType=VARCHAR},
+      isDeleted = #{isdeleted,jdbcType=BIT},
+      dept_id = #{deptId,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

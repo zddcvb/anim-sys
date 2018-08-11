@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yanxi.anim.sys.mapper.AnimEmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.yanxi.anim.sys.pojo.AnimEmployee" >
+    <id column="employee_id" property="employeeId" jdbcType="VARCHAR" />
+    <result column="employee_sex" property="employeeSex" jdbcType="VARCHAR" />
+    <result column="employee_name" property="employeeName" jdbcType="VARCHAR" />
+    <result column="employee_age" property="employeeAge" jdbcType="INTEGER" />
+    <result column="employee_born" property="employeeBorn" jdbcType="VARCHAR" />
+    <result column="employee_cardNum" property="employeeCardnum" jdbcType="VARCHAR" />
+    <result column="employee_school" property="employeeSchool" jdbcType="VARCHAR" />
+    <result column="employee_major" property="employeeMajor" jdbcType="VARCHAR" />
+    <result column="employee_education" property="employeeEducation" jdbcType="VARCHAR" />
+    <result column="employee_family_address" property="employeeFamilyAddress" jdbcType="VARCHAR" />
+    <result column="employee_now_address" property="employeeNowAddress" jdbcType="VARCHAR" />
+    <result column="employee_telephone" property="employeeTelephone" jdbcType="VARCHAR" />
+    <result column="employee_qq" property="employeeQq" jdbcType="VARCHAR" />
+    <result column="employee_wechant" property="employeeWechant" jdbcType="VARCHAR" />
+    <result column="employee_worked_time" property="employeeWorkedTime" jdbcType="VARCHAR" />
+    <result column="isLeaved" property="isleaved" jdbcType="BIT" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+    <result column="employee_createTime" property="employeeCreatetime" jdbcType="VARCHAR" />
+    <result column="employee_updateTime" property="employeeUpdatetime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    employee_id, employee_sex, employee_name, employee_age, employee_born, employee_cardNum, 
+    employee_school, employee_major, employee_education, employee_family_address, employee_now_address, 
+    employee_telephone, employee_qq, employee_wechant, employee_worked_time, isLeaved, 
+    role_id, dept_id, employee_createTime, employee_updateTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yanxi.anim.sys.pojo.AnimEmployeeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from anim_employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from anim_employee
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from anim_employee
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yanxi.anim.sys.pojo.AnimEmployeeExample" >
+    delete from anim_employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yanxi.anim.sys.pojo.AnimEmployee" >
+    insert into anim_employee (employee_id, employee_sex, employee_name, 
+      employee_age, employee_born, employee_cardNum, 
+      employee_school, employee_major, employee_education, 
+      employee_family_address, employee_now_address, 
+      employee_telephone, employee_qq, employee_wechant, 
+      employee_worked_time, isLeaved, role_id, 
+      dept_id, employee_createTime, employee_updateTime
+      )
+    values (#{employeeId,jdbcType=VARCHAR}, #{employeeSex,jdbcType=VARCHAR}, #{employeeName,jdbcType=VARCHAR}, 
+      #{employeeAge,jdbcType=INTEGER}, #{employeeBorn,jdbcType=VARCHAR}, #{employeeCardnum,jdbcType=VARCHAR}, 
+      #{employeeSchool,jdbcType=VARCHAR}, #{employeeMajor,jdbcType=VARCHAR}, #{employeeEducation,jdbcType=VARCHAR}, 
+      #{employeeFamilyAddress,jdbcType=VARCHAR}, #{employeeNowAddress,jdbcType=VARCHAR}, 
+      #{employeeTelephone,jdbcType=VARCHAR}, #{employeeQq,jdbcType=VARCHAR}, #{employeeWechant,jdbcType=VARCHAR}, 
+      #{employeeWorkedTime,jdbcType=VARCHAR}, #{isleaved,jdbcType=BIT}, #{roleId,jdbcType=VARCHAR}, 
+      #{deptId,jdbcType=VARCHAR}, #{employeeCreatetime,jdbcType=VARCHAR}, #{employeeUpdatetime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yanxi.anim.sys.pojo.AnimEmployee" >
+    insert into anim_employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="employeeSex != null" >
+        employee_sex,
+      </if>
+      <if test="employeeName != null" >
+        employee_name,
+      </if>
+      <if test="employeeAge != null" >
+        employee_age,
+      </if>
+      <if test="employeeBorn != null" >
+        employee_born,
+      </if>
+      <if test="employeeCardnum != null" >
+        employee_cardNum,
+      </if>
+      <if test="employeeSchool != null" >
+        employee_school,
+      </if>
+      <if test="employeeMajor != null" >
+        employee_major,
+      </if>
+      <if test="employeeEducation != null" >
+        employee_education,
+      </if>
+      <if test="employeeFamilyAddress != null" >
+        employee_family_address,
+      </if>
+      <if test="employeeNowAddress != null" >
+        employee_now_address,
+      </if>
+      <if test="employeeTelephone != null" >
+        employee_telephone,
+      </if>
+      <if test="employeeQq != null" >
+        employee_qq,
+      </if>
+      <if test="employeeWechant != null" >
+        employee_wechant,
+      </if>
+      <if test="employeeWorkedTime != null" >
+        employee_worked_time,
+      </if>
+      <if test="isleaved != null" >
+        isLeaved,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="employeeCreatetime != null" >
+        employee_createTime,
+      </if>
+      <if test="employeeUpdatetime != null" >
+        employee_updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSex != null" >
+        #{employeeSex,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null" >
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeAge != null" >
+        #{employeeAge,jdbcType=INTEGER},
+      </if>
+      <if test="employeeBorn != null" >
+        #{employeeBorn,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCardnum != null" >
+        #{employeeCardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSchool != null" >
+        #{employeeSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeMajor != null" >
+        #{employeeMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEducation != null" >
+        #{employeeEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeFamilyAddress != null" >
+        #{employeeFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNowAddress != null" >
+        #{employeeNowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeTelephone != null" >
+        #{employeeTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeQq != null" >
+        #{employeeQq,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeWechant != null" >
+        #{employeeWechant,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeWorkedTime != null" >
+        #{employeeWorkedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaved != null" >
+        #{isleaved,jdbcType=BIT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCreatetime != null" >
+        #{employeeCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeUpdatetime != null" >
+        #{employeeUpdatetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yanxi.anim.sys.pojo.AnimEmployeeExample" resultType="java.lang.Integer" >
+    select count(*) from anim_employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update anim_employee
+    <set >
+      <if test="record.employeeId != null" >
+        employee_id = #{record.employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeSex != null" >
+        employee_sex = #{record.employeeSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeName != null" >
+        employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeAge != null" >
+        employee_age = #{record.employeeAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeBorn != null" >
+        employee_born = #{record.employeeBorn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeCardnum != null" >
+        employee_cardNum = #{record.employeeCardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeSchool != null" >
+        employee_school = #{record.employeeSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeMajor != null" >
+        employee_major = #{record.employeeMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeEducation != null" >
+        employee_education = #{record.employeeEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeFamilyAddress != null" >
+        employee_family_address = #{record.employeeFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeNowAddress != null" >
+        employee_now_address = #{record.employeeNowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeTelephone != null" >
+        employee_telephone = #{record.employeeTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeQq != null" >
+        employee_qq = #{record.employeeQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeWechant != null" >
+        employee_wechant = #{record.employeeWechant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeWorkedTime != null" >
+        employee_worked_time = #{record.employeeWorkedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isleaved != null" >
+        isLeaved = #{record.isleaved,jdbcType=BIT},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        dept_id = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeCreatetime != null" >
+        employee_createTime = #{record.employeeCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeUpdatetime != null" >
+        employee_updateTime = #{record.employeeUpdatetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update anim_employee
+    set employee_id = #{record.employeeId,jdbcType=VARCHAR},
+      employee_sex = #{record.employeeSex,jdbcType=VARCHAR},
+      employee_name = #{record.employeeName,jdbcType=VARCHAR},
+      employee_age = #{record.employeeAge,jdbcType=INTEGER},
+      employee_born = #{record.employeeBorn,jdbcType=VARCHAR},
+      employee_cardNum = #{record.employeeCardnum,jdbcType=VARCHAR},
+      employee_school = #{record.employeeSchool,jdbcType=VARCHAR},
+      employee_major = #{record.employeeMajor,jdbcType=VARCHAR},
+      employee_education = #{record.employeeEducation,jdbcType=VARCHAR},
+      employee_family_address = #{record.employeeFamilyAddress,jdbcType=VARCHAR},
+      employee_now_address = #{record.employeeNowAddress,jdbcType=VARCHAR},
+      employee_telephone = #{record.employeeTelephone,jdbcType=VARCHAR},
+      employee_qq = #{record.employeeQq,jdbcType=VARCHAR},
+      employee_wechant = #{record.employeeWechant,jdbcType=VARCHAR},
+      employee_worked_time = #{record.employeeWorkedTime,jdbcType=VARCHAR},
+      isLeaved = #{record.isleaved,jdbcType=BIT},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
+      dept_id = #{record.deptId,jdbcType=VARCHAR},
+      employee_createTime = #{record.employeeCreatetime,jdbcType=VARCHAR},
+      employee_updateTime = #{record.employeeUpdatetime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yanxi.anim.sys.pojo.AnimEmployee" >
+    update anim_employee
+    <set >
+      <if test="employeeSex != null" >
+        employee_sex = #{employeeSex,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null" >
+        employee_name = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeAge != null" >
+        employee_age = #{employeeAge,jdbcType=INTEGER},
+      </if>
+      <if test="employeeBorn != null" >
+        employee_born = #{employeeBorn,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCardnum != null" >
+        employee_cardNum = #{employeeCardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSchool != null" >
+        employee_school = #{employeeSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeMajor != null" >
+        employee_major = #{employeeMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEducation != null" >
+        employee_education = #{employeeEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeFamilyAddress != null" >
+        employee_family_address = #{employeeFamilyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNowAddress != null" >
+        employee_now_address = #{employeeNowAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeTelephone != null" >
+        employee_telephone = #{employeeTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeQq != null" >
+        employee_qq = #{employeeQq,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeWechant != null" >
+        employee_wechant = #{employeeWechant,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeWorkedTime != null" >
+        employee_worked_time = #{employeeWorkedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaved != null" >
+        isLeaved = #{isleaved,jdbcType=BIT},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCreatetime != null" >
+        employee_createTime = #{employeeCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeUpdatetime != null" >
+        employee_updateTime = #{employeeUpdatetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yanxi.anim.sys.pojo.AnimEmployee" >
+    update anim_employee
+    set employee_sex = #{employeeSex,jdbcType=VARCHAR},
+      employee_name = #{employeeName,jdbcType=VARCHAR},
+      employee_age = #{employeeAge,jdbcType=INTEGER},
+      employee_born = #{employeeBorn,jdbcType=VARCHAR},
+      employee_cardNum = #{employeeCardnum,jdbcType=VARCHAR},
+      employee_school = #{employeeSchool,jdbcType=VARCHAR},
+      employee_major = #{employeeMajor,jdbcType=VARCHAR},
+      employee_education = #{employeeEducation,jdbcType=VARCHAR},
+      employee_family_address = #{employeeFamilyAddress,jdbcType=VARCHAR},
+      employee_now_address = #{employeeNowAddress,jdbcType=VARCHAR},
+      employee_telephone = #{employeeTelephone,jdbcType=VARCHAR},
+      employee_qq = #{employeeQq,jdbcType=VARCHAR},
+      employee_wechant = #{employeeWechant,jdbcType=VARCHAR},
+      employee_worked_time = #{employeeWorkedTime,jdbcType=VARCHAR},
+      isLeaved = #{isleaved,jdbcType=BIT},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=VARCHAR},
+      employee_createTime = #{employeeCreatetime,jdbcType=VARCHAR},
+      employee_updateTime = #{employeeUpdatetime,jdbcType=VARCHAR}
+    where employee_id = #{employeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>
